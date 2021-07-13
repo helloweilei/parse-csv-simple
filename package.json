@@ -1,0 +1,20 @@
+{
+  "name": "parse-csv-simple",
+  "version": "1.0.0",
+  "description": "A parser for csv file.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/helloweilei/parse-csv-simple.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/helloweilei/parse-csv-simple/issues"
+  },
+  "homepage": "https://github.com/helloweilei/parse-csv-simple#readme"
+}
