@@ -1,4 +1,3 @@
-import { Parser } from "../parser";
 
 export interface ParserOption {
   delimiter?: string;
@@ -8,13 +7,24 @@ export interface Builder {
 
   limit: number | null;
 
-  onCell: (cell: string, parser: Parser) => void;
+  onCell: (cell: any) => void;
 
 
   /**
-   * invoked when a new row generated.
-   * 
+   * invoked when a row ended.
+   *
    * @returns {boolean} whether continue to parse.
    */
-  onRow: (parser: Parser) => boolean;
+  onRowEnd: (next: () => void) => boolean;
+
+  onEnd: () => void;
+}
+
+export interface ParsedResult {
+  type: 'cell' | 'row' | null;
+  value?: string;
+}
+
+export interface Transformer {
+  transform: (cell: any) => any;
 }
