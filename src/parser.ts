@@ -5,13 +5,14 @@ export class Parser {
 
   private delimiter: string;
   private position = 0;
-  private builder: Builder | null = null;
+  private builder: Builder | null;
   private content = '';
 
   private transformers: Transformer[] = [];
 
   constructor(option?: ParserOption) {
     this.delimiter = option?.delimiter || ',';
+    this.builder = option?.builder || null;
   }
 
   private * iterateContent(): Generator<ParsedResult> {
@@ -22,9 +23,9 @@ export class Parser {
     let match;
     while (this.position < len) {
       cellReg.lastIndex = this.position;
-      if (match = cellReg.exec(content)) {
+      if ((match = cellReg.exec(content)) && match[0].length > 0) {
         this.position += match[0].length;
-        yield { type: 'cell', value: match[1] };
+        yield { type: 'cell', value: match[2] };
       } else if (match = ROW_REG.exec(content)) {
         this.position += match[0].length;
         yield { type: 'row' };
@@ -59,6 +60,7 @@ export class Parser {
       if (resut.value.type === 'cell') {
         const cell = transform(resut.value.value);
         builder.onCell(cell);
+        next();
       } else if (resut.value.type === 'row') {
         builder.onRowEnd(next);
       }

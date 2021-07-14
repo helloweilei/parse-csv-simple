@@ -3,9 +3,13 @@ import { Transformer } from '../interfaces';
 
 export const createCellRegexp = (delimiter: string): RegExp => {
   delimiter = escapeMetaChars(delimiter);
-  const commonCell = `(.*?)\\s*${delimiter}`;
-  const cellWithQuote = `"(?:([^"]|"")*)"\\s*${delimiter}`;
-  return new RegExp(`^\s*(?:${commonCell}|${cellWithQuote})`, 'g');
+  const cellReg = `("?)((?:[^"]|"")*?)\\1`;
+  const spaceWithoutNewLine = "(?:(?!\\n)\\s)*";
+  // isure: \s can match \n
+  return new RegExp(
+    `${spaceWithoutNewLine}${cellReg}` +
+    `${spaceWithoutNewLine}(?:${delimiter}|(?=\\r?\\n)|$)`, 'gm'
+  );
 }
 
 export const escapeMetaChars = (text: string): string => {
@@ -13,6 +17,8 @@ export const escapeMetaChars = (text: string): string => {
   for (let char of text) {
     if (REGEXP_META_CHARS.includes(char)) {
       res.push(`\${char}`);
+    } else {
+      res.push(char);
     }
   }
   return res.join();
@@ -24,4 +30,8 @@ export function composeTransformer(transformers: Transformer[]): (cell: string) 
       return transformer.transform.call(transformer, prevResult);
     }, cell);
   }
+}
+
+export function isArrayEmpty(arr: any[]) {
+  return arr.length === 0 || arr.every(item => item === '' || item == null);
 }

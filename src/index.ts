@@ -1,5 +1,25 @@
 import { Parser } from "./parser";
+import { SyncBuilder } from './builders/sync-builder';
 
-export function parse(text: string) {
-  return new Parser().parse(text);
+export function parse(text: string, option?: {limit?: number, delimiter?: string}) {
+  option = option || {};
+  const builder = new SyncBuilder({
+    limit: option.limit || Infinity,
+  });
+
+  new Parser({
+    builder,
+    delimiter: option.delimiter,
+  }).parse(text);
+
+  return builder.getResult();
 }
+
+export function parseIterable() {
+  // TODO: implemented based on IteratorBUilder
+}
+const specialCsvText = `name,remark
+    weilei,"good, work"
+    panda,"hello ""panda\nmonkey"""
+  `;
+parse(specialCsvText);

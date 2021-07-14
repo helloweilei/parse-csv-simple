@@ -2,9 +2,10 @@
   "name": "parse-csv-simple",
   "version": "1.0.0",
   "description": "A parser for csv file.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha './src/__test__/**/*.ts'",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,15 @@
   "bugs": {
     "url": "https://github.com/helloweilei/parse-csv-simple/issues"
   },
-  "homepage": "https://github.com/helloweilei/parse-csv-simple#readme"
+  "homepage": "https://github.com/helloweilei/parse-csv-simple#readme",
+  "devDependencies": {
+    "@types/chai": "^4.2.21",
+    "@types/mocha": "^8.2.3",
+    "chai": "^4.3.4",
+    "mocha": "^9.0.2"
+  },
+  "dependencies": {
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5"
+  }
 }

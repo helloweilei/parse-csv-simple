@@ -1,6 +1,7 @@
 
 export interface ParserOption {
   delimiter?: string;
+  builder?: Builder;
 }
 
 export interface Builder {
@@ -15,9 +16,11 @@ export interface Builder {
    *
    * @returns {boolean} whether continue to parse.
    */
-  onRowEnd: (next: () => void) => boolean;
+  onRowEnd: (next: () => void) => void;
 
   onEnd: () => void;
+
+  getResult: () => any;
 }
 
 export interface ParsedResult {
