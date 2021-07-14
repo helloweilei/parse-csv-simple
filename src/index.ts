@@ -18,8 +18,3 @@ export function parse(text: string, option?: {limit?: number, delimiter?: string
 export function parseIterable() {
   // TODO: implemented based on IteratorBUilder
 }
-const specialCsvText = `name,remark
-    weilei,"good, work"
-    panda,"hello ""panda\nmonkey"""
-  `;
-parse(specialCsvText);

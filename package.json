@@ -1,6 +1,6 @@
 {
   "name": "parse-csv-simple",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A parser for csv file.",
   "main": "dist/index.js",
   "scripts": {
