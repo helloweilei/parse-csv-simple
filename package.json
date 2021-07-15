@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/helloweilei/parse-csv-simple.git"
   },
-  "keywords": [],
+  "keywords": ["csv", "parse csv"],
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -24,5 +24,8 @@
     "chai": "^4.3.4",
     "mocha": "^9.0.2",
     "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "ts-node": "^10.1.0"
   }
 }

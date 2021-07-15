@@ -51,17 +51,17 @@ export class Parser {
     const builder = this.builder;
 
     const next = () => {
-      const resut = iterator.next();
-      if (resut.done) {
+      const result = iterator.next();
+      if (result.done) {
         builder.onEnd();
         return;
       }
 
-      if (resut.value.type === 'cell') {
-        const cell = transform(resut.value.value);
+      if (result.value.type === 'cell') {
+        const cell = transform(result.value.value);
         builder.onCell(cell);
         next();
-      } else if (resut.value.type === 'row') {
+      } else if (result.value.type === 'row') {
         builder.onRowEnd(next);
       }
     }
